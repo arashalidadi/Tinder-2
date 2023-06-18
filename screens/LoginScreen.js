@@ -29,10 +29,15 @@ const LoginScreen = () => {
       >
         <View className="flex-row justify-center absolute w-52  bg-white bottom-20 mx-20 rounded-2xl">
           <TouchableOpacity
-            className="  p-4  "
+            className="p-4"
             onPress={() => signInWithGoogle()}
+            disabled={loading}
           >
-            <Text className="text-center font-semibold ">
+            <Text
+              className={`text-center  font-semibold ${
+                loading ? "text-green-500" : ""
+              }`}
+            >
               Sign in & get swiping
             </Text>
           </TouchableOpacity>
