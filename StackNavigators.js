@@ -9,7 +9,11 @@ const Stack = createNativeStackNavigator();
 const StackNavigators = () => {
   const { userInfo } = useAuth();
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       {userInfo ? (
         <>
           <Stack.Screen name="Home" component={HomeScreen} />
