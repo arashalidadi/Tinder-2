@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
           .catch((err) => {
             setError(err);
           });
-        return Promise.reject();
+        // return Promise.reject();
       }
     } catch (err) {
       setError(err);
@@ -87,7 +87,10 @@ export const AuthProvider = ({ children }) => {
           setUserInfo(user);
         } else {
           //Log out
-          setUserInfo(null);
+          setUserInfo({
+            photoURL:
+              "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
+          });
         }
         setLoadingInitial(false);
       }),

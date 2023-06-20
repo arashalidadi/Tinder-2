@@ -21,9 +21,9 @@ const LoginScreen = () => {
         }}
         className="flex-1 "
       >
-        <View className="flex-row justify-center fixed w-full bottom-20">
+        <View className="flex-row justify-center absolute w-full bottom-28">
           <TouchableOpacity
-            className="p-4  rounded-2xl bg-white"
+            className="p-4 rounded-2xl bg-white"
             onPress={() => signInWithGoogle()}
             disabled={loading}
           >
