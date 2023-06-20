@@ -6,7 +6,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import useAuth from "../hooks/useAuth";
 import { AntDesign, Ionicons, Entypo } from "@expo/vector-icons";
@@ -14,6 +14,8 @@ import Swiper from "react-native-deck-swiper";
 const HomeScreen = () => {
   const navigation = useNavigation();
   const { userInfo, logout } = useAuth();
+  const swipRef = useRef(null);
+  const [fav, setFav] = useState(false);
   const users = [
     {
       id: "1",
@@ -64,7 +66,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-gray-200  ">
       {/* Header */}
-      <View className="flex-row items-center justify-between px-5">
+      <View className="flex-row items-center justify-between px-5 mt-3 ">
         <TouchableOpacity className="" onPress={logout}>
           <Image
             source={{
@@ -87,7 +89,7 @@ const HomeScreen = () => {
       {/* End of Headre */}
 
       {/* Cards */}
-      <View className="flex-1 -mt-6 border-2 border-black">
+      <View className="flex-1 border-2 border-black">
         <Swiper
           //cards={["DO", "MORE", "OF", "WHAT", "MAKES", "YOU", "HAPPY"]}
           cards={users}
@@ -105,6 +107,7 @@ const HomeScreen = () => {
           animateCardOpacity
           backgroundColor={"#4FD0E9"}
           stackSize={5}
+          ref={swipRef}
           overlayLabels={{
             left: {
               title: "NOPE",
@@ -181,13 +184,30 @@ const HomeScreen = () => {
         ></Swiper>
       </View>
       {/* end of cards */}
-      <Button title="Log out" onPress={() => logout()} />
-      {/* <Text>In log screen</Text>
-      
-      <Text className="font-bold text-lg">{userInfo.displayName}</Text>
-      <Text className="font-bold text-lg">{userInfo.email}</Text>
-      <Button title="Go to Chat" onPress={() => navigation.navigate("Chat")} /> 
-      <Button title="Log out" onPress={() => logout()} /> */}
+      <View className="flex flex-row justify-evenly">
+        <TouchableOpacity
+          onPress={() => {
+            swipRef.current.swipeLeft();
+          }}
+          className="items-center justify-center
+         bg-red-300 rounded-full p-5"
+        >
+          <Entypo name="cross" size={24} color="red" />
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            setFav(!fav);
+            swipRef.current.swipeRight();
+          }}
+          className=" rounded-full p-5 bg-green-300"
+        >
+          {fav ? (
+            <AntDesign name="hearto" size={24} color="green" />
+          ) : (
+            <AntDesign name="hearto" size={24} color="green" />
+          )}
+        </TouchableOpacity>
+      </View>
     </SafeAreaView>
   );
 };
