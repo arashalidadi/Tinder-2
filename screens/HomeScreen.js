@@ -66,7 +66,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView className="flex-1 bg-gray-200  ">
       {/* Header */}
-      <View className="flex-row items-center justify-between px-5 mt-3 ">
+      <View className="flex-row items-center justify-between px-5 mt-5 ">
         <TouchableOpacity className="" onPress={logout}>
           <Image
             source={{
@@ -75,7 +75,7 @@ const HomeScreen = () => {
             className="h-10 w-10 rounded-full "
           />
         </TouchableOpacity>
-        <TouchableOpacity className="">
+        <TouchableOpacity onPress={() => navigation.navigate("ModalScreen")}>
           <Image
             source={require("../assets/logo.png")}
             className="h-14 w-14  "
@@ -196,7 +196,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => {
-            setFav(!fav);
+            // setFav(!fav);
             swipRef.current.swipeRight();
           }}
           className=" rounded-full p-5 bg-green-300"
@@ -204,7 +204,7 @@ const HomeScreen = () => {
           {fav ? (
             <AntDesign name="hearto" size={24} color="green" />
           ) : (
-            <AntDesign name="hearto" size={24} color="green" />
+            <AntDesign name="heart" size={24} color="green" />
           )}
         </TouchableOpacity>
       </View>

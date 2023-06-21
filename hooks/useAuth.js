@@ -14,6 +14,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "../firebaseConfig";
+import { makeRedirectUri } from "expo-auth-session";
 
 const AuthContext = createContext();
 WebBrowser.maybeCompleteAuthSession();
@@ -25,6 +26,10 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [loadingInitial, setLoadingInitial] = useState(true);
+  const myredirectUri = makeRedirectUri({
+    scheme: "Tinder-2",
+    path: "redirect",
+  });
   const [request, response, promptAsync] = Google.useAuthRequest({
     androidClientId:
       "480059993256-fkr0c5n0ovcuhtpbaf6i44n54uh57eqt.apps.googleusercontent.com",
@@ -41,6 +46,7 @@ export const AuthProvider = ({ children }) => {
       "https://www.googleapis.com/auth/userinfo.profile",
     ],
     selectAccount: true,
+    // redirectUri: myredirectUri,
   });
 
   const signInWithGoogle = async () => {
@@ -87,10 +93,12 @@ export const AuthProvider = ({ children }) => {
           setUserInfo(user);
         } else {
           //Log out
-          setUserInfo({
-            photoURL:
-              "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
-          });
+          // setUserInfo({
+          //   photoURL:
+          //     "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/elon.png",
+          //   displayName: "Arasham",
+          // });
+          setUserInfo(null);
         }
         setLoadingInitial(false);
       }),
